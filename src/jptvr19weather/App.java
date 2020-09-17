@@ -6,6 +6,7 @@
 package jptvr19weather;
 
 import java.util.Random;
+import java.util.Scanner;
 
 /**
  *
@@ -34,6 +35,17 @@ class App {
         int n = 0;
         Random random = new Random();
         int[][] tempInYear = new int[12][];
+        //выведем строку с номерами дней месяца
+        System.out.print("     ");
+        for (int i = 1; i < 32; i++) {
+            System.out.printf("%4d",i);
+        }
+        System.out.println();
+        for (int i = 1; i < 32; i++) {
+            System.out.print("----");
+        }
+        System.out.println();
+        
         for (int i = 0; i < 12; i++) {
             switch (i) {
                 case 0: min=-30; max=0; n=31; break;
@@ -50,14 +62,23 @@ class App {
                 case 11: min=-15; max=-5; n=31; break;
                 
             }
+            //создаем ячейки месяца
             tempInYear[i] = new int[n];
+            //заполняем дни-ячейки месяца температурой
+            System.out.printf("%4d) ",i+1);
             for (int j = 0; j < tempInYear[i].length; j++) {
                 tempInYear[i][j]=random.nextInt(max-min+1)+min;
                 System.out.printf("%4d",tempInYear[i][j]);
             }
+            //переходим на новую строку (новый месяц)
             System.out.println();
         }
-        
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Номер месяца: ");
+        int month = scanner.nextInt();
+        System.out.print("День месяца: ");
+        int day = scanner.nextInt();
+        System.out.printf("В этот день температура была %4d градусов%n", tempInYear[month-1][day-1]);
         
     }   
 }
